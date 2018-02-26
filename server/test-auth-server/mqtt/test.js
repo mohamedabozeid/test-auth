@@ -1,4 +1,5 @@
 var mqtt = require('mqtt');
+var io = require('../sockets/base'); 
 
 var mqttServer = function(){    
 }
@@ -17,6 +18,7 @@ mqttServer.prototype.init = function(){
      
     client.on('message', function (topic, message) {
       // message is Buffer
+      io.sendMsg({"topic":topic, "msg":message.toString()});
       console.log(message.toString());
       //client.end();
     })
